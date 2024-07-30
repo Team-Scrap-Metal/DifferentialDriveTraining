@@ -1,5 +1,5 @@
 # DifferentialDriveTraining
-This repository creates a differential drive for an FRC robot. Each branch is a different student's version of the introduction project. This project teaches students about Advantage Kit code structure, an introduction to Java and object orientated coding, and also introduces students on FRC specific code
+This repository creates a differential drive for an FRC robot. Each branch is a different student's version of the introduction project. This project teaches students about Advantage Kit code structure, an introduction to Java and object-orientated coding, and also introduces students on FRC specific code
 
 ## Code Etiquette
   Comments on EVERYTHING (Commands, Constants, etc)
@@ -10,6 +10,7 @@ This repository creates a differential drive for an FRC robot. Each branch is a 
   - 'Assignees': used to indicate who is working on what
   - 'Labels': used to organize issues, add as necessary
   - 'Development': link the branch to the issue
+Create Pull Requests(PRs) for every push into Dev
 
    Beta Numbers
  - first number = repository #
