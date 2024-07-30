@@ -20,9 +20,12 @@ public class Drive extends SubsystemBase {
  private final DriveIO io;
  private final DriveIOInputsAutoLogged inputs = new DriveIOInputsAutoLogged();
   /** Creates a new Drive. */
+
+
+
+
   public Drive(DriveIO io) {
     this.io = io;
-    
    
   }
 
@@ -34,14 +37,17 @@ public class Drive extends SubsystemBase {
 
   /** Run closed loop at the specified voltage. */
   
+public void tankDrive(double leftJoystick, double rightJoystick) {
+io.setLeftVoltage(leftJoystick *12);
+io.setRightVoltage(rightJoystick*12);
 
-  /** Run open loop based on stick positions. */
-  public void driveArcade(double xSpeed, double zRotation) {
-   
-  }
+}
 
   /** Stops the drive. */
   public void stop() {
+    io.setLeftVoltage(0);
    
+    io.setRightVoltage(0);
   }
 }
+ 

@@ -35,7 +35,7 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardNumber;
  */
 public class RobotContainer {
   // Subsystems
-
+public final Drive m_DriveTrainSubSystem;
   // Controller
   private final CommandXboxController controller = new CommandXboxController(0);
 
@@ -47,16 +47,15 @@ public class RobotContainer {
     switch (Constants.currentMode) {
       case REAL:
         // Real robot, instantiate hardware IO implementations
-        break;
-
+m_DriveTrainSubSystem = null;
       case SIM:
         // Sim robot, instantiate physics sim IO implementations
-        break;
-
+m_DriveTrainSubSystem =  new Drive(new DriveIOSim());
       default:
         // Replayed robot, disable IO implementations
-        break;
-    }
+    m_DriveTrainSubSystem = new Drive(new DriveIO() {
+      
+    });
 
 
     // Configure the button bindings
