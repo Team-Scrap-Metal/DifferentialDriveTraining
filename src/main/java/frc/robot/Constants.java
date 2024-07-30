@@ -23,6 +23,7 @@ package frc.robot;
  */
 public final class Constants {
   public static final Mode currentMode = Mode.REAL;
+  public static final int batteryVolts = 12;
 
   public static enum Mode {
     /** Running on a real robot. */
@@ -34,4 +35,6 @@ public final class Constants {
     /** Replaying from a log file. */
     REPLAY
   }
+
+
 }

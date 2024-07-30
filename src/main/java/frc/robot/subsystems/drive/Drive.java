@@ -14,6 +14,7 @@
 package frc.robot.subsystems.drive;
 import org.littletonrobotics.junction.Logger;
 
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drive extends SubsystemBase {
@@ -22,7 +23,6 @@ public class Drive extends SubsystemBase {
   /** Creates a new Drive. */
   public Drive(DriveIO io) {
     this.io = io;
-    
    
   }
 
@@ -32,16 +32,14 @@ public class Drive extends SubsystemBase {
     Logger.processInputs("Drive", inputs);
   }
 
-  /** Run closed loop at the specified voltage. */
-  
-
-  /** Run open loop based on stick positions. */
-  public void driveArcade(double xSpeed, double zRotation) {
-   
+  public void tankDrive(double leftJoystick, double rightJoystick){
+    io.setLeftVoltage(leftJoystick * 12);
+    io.setRightVoltage(rightJoystick * 12);
   }
 
   /** Stops the drive. */
   public void stop() {
-   
+   io.setLeftVoltage(0);
+   io.setRightVoltage(0);
   }
 }
