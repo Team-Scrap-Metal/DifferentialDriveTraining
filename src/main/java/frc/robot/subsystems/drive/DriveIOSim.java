@@ -20,16 +20,19 @@ public class DriveIOSim implements DriveIO {
   private final DCMotorSim leftDrive;
   private final DCMotorSim rightDrive;
 
-
-  public DriveIOSim(){
-    leftDrive = new DCMotorSim(DCMotor.getNEO(2), DriveConstants.GEAR_RATIO, DriveConstants.MOI_JKG_M2);
-    rightDrive = new DCMotorSim(DCMotor.getNEO(2), DriveConstants.GEAR_RATIO, DriveConstants.MOI_JKG_M2);
+  public DriveIOSim() {
+    leftDrive =
+        new DCMotorSim(DCMotor.getNEO(2), DriveConstants.GEAR_RATIO, DriveConstants.MOI_JKG_M2);
+    rightDrive =
+        new DCMotorSim(DCMotor.getNEO(2), DriveConstants.GEAR_RATIO, DriveConstants.MOI_JKG_M2);
   }
 
   @Override
   public void updateInputs(DriveIOInputs inputs) {
-   inputs.driveCurrentAmps = (leftDrive.getCurrentDrawAmps() + rightDrive.getCurrentDrawAmps())/2;
-   inputs.drivePositionRad = (leftDrive.getAngularPositionRad() + rightDrive.getAngularPositionRad())/2;
+    inputs.driveCurrentAmps =
+        (leftDrive.getCurrentDrawAmps() + rightDrive.getCurrentDrawAmps()) / 2;
+    inputs.driveLeftPositionRad = leftDrive.getAngularPositionRad();
+    inputs.driveRightPositionRad = rightDrive.getAngularPositionRad();
   }
 
   @Override
@@ -41,5 +44,4 @@ public class DriveIOSim implements DriveIO {
   public void setRightVoltage(double rightVolts) {
     rightDrive.setInputVoltage(rightVolts);
   }
-
 }
