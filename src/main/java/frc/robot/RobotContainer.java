@@ -13,19 +13,13 @@
 
 package frc.robot;
 
-import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.DriveIO;
 import frc.robot.subsystems.drive.DriveIOSim;
-import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
-import org.littletonrobotics.junction.networktables.LoggedDashboardNumber;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -35,7 +29,7 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardNumber;
  */
 public class RobotContainer {
   // Subsystems
-public final Drive m_DriveTrainSubSystem;
+  public final Drive m_DriveTrainSubSystem;
   // Controller
   private final CommandXboxController controller = new CommandXboxController(0);
 
@@ -44,19 +38,22 @@ public final Drive m_DriveTrainSubSystem;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    switch (Constants.currentMode) {
+    switch (Constants.getMode()) {
       case REAL:
         // Real robot, instantiate hardware IO implementations
-m_DriveTrainSubSystem = null;
+        m_DriveTrainSubSystem = null;
+        break;
       case SIM:
+
         // Sim robot, instantiate physics sim IO implementations
-m_DriveTrainSubSystem =  new Drive(new DriveIOSim());
+        m_DriveTrainSubSystem = new Drive(new DriveIOSim());
+
+        break;
       default:
         // Replayed robot, disable IO implementations
-    m_DriveTrainSubSystem = new Drive(new DriveIO() {
-      
-    });
-
+        m_DriveTrainSubSystem = new Drive(new DriveIO() {});
+        break;
+    }
 
     // Configure the button bindings
     configureButtonBindings();
@@ -69,6 +66,7 @@ m_DriveTrainSubSystem =  new Drive(new DriveIOSim());
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    m_DriveTrainSubSystem.tankDrive(controller.getLeftY(), controller.getRightY());
   }
 
   /**
@@ -77,7 +75,7 @@ m_DriveTrainSubSystem =  new Drive(new DriveIOSim());
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return null; 
+    return null;
     // autoChooser.get();
   }
 }

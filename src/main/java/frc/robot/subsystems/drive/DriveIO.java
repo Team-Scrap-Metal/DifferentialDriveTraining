@@ -13,17 +13,15 @@
 
 package frc.robot.subsystems.drive;
 
-import edu.wpi.first.math.geometry.Rotation2d;
 import org.littletonrobotics.junction.AutoLog;
 
 public interface DriveIO {
   @AutoLog
   public static class DriveIOInputs {
-    public double drivePositionRad = 0;
+    public double driveLeftPositionRad = 0;
     public double driveCurrentAmps = 0;
 
-
-
+    public double driveRightPositionRad = 0;
   }
 
   /** Updates the set of loggable inputs. */
@@ -31,5 +29,6 @@ public interface DriveIO {
 
   /** Run open loop at the specified voltage. */
   public default void setLeftVoltage(double leftVolts) {}
-  public default void setRightVoltage( double rightVolts) {}
+
+  public default void setRightVoltage(double rightVolts) {}
 }

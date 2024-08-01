@@ -17,40 +17,31 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 
 public class DriveIOSim implements DriveIO {
- private final DCMotorSim leftDrive;
- private final DCMotorSim rightDrive;
- 
+  private final DCMotorSim leftDrive;
+  private final DCMotorSim rightDrive;
+
   public DriveIOSim() {
-    leftDrive = new DCMotorSim(DCMotor.getNEO(2), DriveConstants.GEAR_RATIO, DriveConstants.MOI_JKG);
-    rightDrive= new DCMotorSim(DCMotor.getNEO(2), DriveConstants.GEAR_RATIO, DriveConstants.MOI_JKG);
-
-
-
-
-
-
-
-
-
+    leftDrive =
+        new DCMotorSim(DCMotor.getNEO(2), DriveConstants.GEAR_RATIO, DriveConstants.MOI_JKG);
+    rightDrive =
+        new DCMotorSim(DCMotor.getNEO(2), DriveConstants.GEAR_RATIO, DriveConstants.MOI_JKG);
   }
-
-
-
 
   @Override
   public void updateInputs(DriveIOInputs inputs) {
-  inputs.driveCurrentAmps = (leftDrive.getCurrentDrawAmps() + rightDrive.getCurrentDrawAmps())/2;
-  inputs.drivePositionRad = (leftDrive.getAngularPositionRad() + rightDrive.getAngularPositionRad())/2;
-
-
+    inputs.driveCurrentAmps =
+        (leftDrive.getCurrentDrawAmps() + rightDrive.getCurrentDrawAmps()) / 2;
+    inputs.driveLeftPositionRad = leftDrive.getAngularPositionRad();
+    inputs.driveRightPositionRad = rightDrive.getAngularPositionRad();
   }
 
   @Override
-  public void setLeftVoltage( double leftVolts) {
- leftDrive.setInputVoltage(leftVolts);   
+  public void setLeftVoltage(double leftVolts) {
+    leftDrive.setInputVoltage(leftVolts);
   }
+
   @Override
-  public void setRightVoltage(double rightVolts){
+  public void setRightVoltage(double rightVolts) {
     rightDrive.setInputVoltage(rightVolts);
   }
 }
