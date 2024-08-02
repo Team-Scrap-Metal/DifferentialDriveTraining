@@ -15,11 +15,10 @@ package frc.robot.subsystems.drive;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.units.Unit;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import org.littletonrobotics.junction.Logger;
 
 public class Drive extends SubsystemBase {
@@ -32,7 +31,7 @@ public class Drive extends SubsystemBase {
     this.io = io;
     differentialDriveOdometry =
         new DifferentialDriveOdometry(
-            new Rotation2d(), inputs.driveLeftPositionRad, inputs.driveRightPositionRad);
+            new Rotation2d(), inputs.driveLeftPositionMeters, inputs.driveRightPositionMeters);
     field = new Field2d();
   }
 
@@ -46,19 +45,17 @@ public class Drive extends SubsystemBase {
   }
 
   public void tankDrive(double leftJoystick, double rightJoystick) {
-    io.setLeftVoltage(leftJoystick * 12);
-    io.setRightVoltage(rightJoystick * 12);
+    io.setVoltage(
+        leftJoystick * Constants.BATTERY_VOLTAGE, rightJoystick * Constants.BATTERY_VOLTAGE);
   }
 
   /** Stops the drive. */
   public void stop() {
-    io.setLeftVoltage(0);
-    io.setRightVoltage(0);
+    io.setVoltage(0, 0);
   }
 
   public void updateOdometry() {
     differentialDriveOdometry.update(
-        new Rotation2d(), inputs.driveLeftPositionRad * Units.inchesToMeters(3), inputs.driveRightPositionRad * Units.inchesToMeters(3));
-
+        inputs.driveRotationRad, inputs.driveLeftPositionMeters, inputs.driveRightPositionMeters);
   }
 }
