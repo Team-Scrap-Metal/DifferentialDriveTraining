@@ -24,8 +24,8 @@ import edu.wpi.first.wpilibj.RobotBase;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static final int batteryVolt = 12;
-
+  public static final int BATTERY_VOLT = 12;
+  public static final double LOOP_CYCLE_SEC = 0.02;
   public static enum Mode {
     /** Running on a real robot. */
     REAL,

@@ -15,6 +15,7 @@ package frc.robot.subsystems.drive;
 
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
+import frc.robot.Constants;
 
 public class DriveIOSim implements DriveIO {
   private final DCMotorSim leftDrive;
@@ -29,6 +30,8 @@ public class DriveIOSim implements DriveIO {
 
   @Override
   public void updateInputs(DriveIOInputs inputs) {
+    leftDrive.update(Constants.LOOP_CYCLE_SEC);
+    rightDrive.update(Constants.LOOP_CYCLE_SEC);
     inputs.driveCurrentAmps =
         (leftDrive.getCurrentDrawAmps() + rightDrive.getCurrentDrawAmps()) / 2;
     inputs.driveLeftPositionRad = leftDrive.getAngularPositionRad();
