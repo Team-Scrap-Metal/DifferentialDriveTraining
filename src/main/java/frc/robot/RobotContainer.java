@@ -16,6 +16,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.DriveIO;
@@ -66,7 +67,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    m_drivetrainSubsystem.tankDrive(controller.getLeftY(), controller.getRightY());
+    m_drivetrainSubsystem.setDefaultCommand(
+        new RunCommand(
+            () -> m_drivetrainSubsystem.tankDrive(controller.getLeftY(), controller.getRightY()),
+            m_drivetrainSubsystem));
   }
 
   /**

@@ -15,6 +15,8 @@ package frc.robot.subsystems.drive;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.util.Units;
+import edu.wpi.first.units.Unit;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -56,6 +58,7 @@ public class Drive extends SubsystemBase {
 
   public void updateOdometry() {
     differentialDriveOdometry.update(
-        new Rotation2d(), inputs.driveLeftPositionRad, inputs.driveRightPositionRad);
+        new Rotation2d(), inputs.driveLeftPositionRad * Units.inchesToMeters(3), inputs.driveRightPositionRad * Units.inchesToMeters(3));
+
   }
 }
